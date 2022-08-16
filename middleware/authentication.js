@@ -8,7 +8,7 @@ const verifyToken = (req, res, next) => {
     }
     try{
         const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-        console.log(decoded.email);
+        //console.log(decoded.email);
         return next();
     }catch{
         return res.sendStatus(403);

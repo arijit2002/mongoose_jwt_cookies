@@ -9,9 +9,9 @@ const verifyRole = async(req,res,next) => {
     }
     try{
         const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-        console.log(decoded.email);
+        //console.log(decoded.email);
         const findUser =await User.findOne({email:decoded.email});
-        console.log(findUser);
+        //console.log(findUser);
         if(findUser.role === 'admin') {
             return next();
         }else{
