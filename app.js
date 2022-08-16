@@ -11,6 +11,7 @@ require("dotenv").config();
 require("./config/database");
 const User = require("./model/user");
 const authentication = require('./middleware/authentication');
+const authorization = require('./middleware/authorization');
 
 const port = process.env.PORT || 3333;
 
@@ -102,9 +103,14 @@ app.get('/logout', authentication, (req,res)=>{
     .redirect('/');
 });
 
-//Authenticated 
+//only for logged in users
 app.get("/protected", authentication, (req, res) => {
     res.sendFile(path.join(__dirname, '/public/protected.html'));
+});
+
+//only for admin
+app.get("/admin", authorization, (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 
 app.listen(port,function(){
