@@ -1,17 +1,11 @@
 const User = require('../model/user')
-const jwt=require("jsonwebtoken");
 require("dotenv").config();
 
 const verifyRole = async(req,res,next) => {
-    const token = req.cookies.access_token;
-    if(!token){
-        return res.sendStatus(403);
-    }
     try{
-        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-        //console.log(decoded.email);
-        const findUser =await User.findOne({email:decoded.email});
-        //console.log(findUser);
+        const decoded=res.locals.user;
+        console.log(decoded)
+        const findUser =await User.findOne({email:decoded});
         if(findUser.role === 'admin') {
             return next();
         }else{

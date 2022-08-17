@@ -109,7 +109,7 @@ app.get("/protected", authentication, (req, res) => {
 });
 
 //only for admin
-app.get("/admin", authorization, (req, res) => {
+app.get("/admin",authentication, authorization, (req, res) => {
     res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
 

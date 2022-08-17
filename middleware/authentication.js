@@ -9,6 +9,7 @@ const verifyToken = (req, res, next) => {
     try{
         const decoded = jwt.verify(token, process.env.TOKEN_KEY);
         //console.log(decoded.email);
+        res.locals.user=decoded.email;
         return next();
     }catch{
         return res.sendStatus(403);
