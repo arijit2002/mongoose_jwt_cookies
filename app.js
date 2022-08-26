@@ -108,7 +108,7 @@ app.get("/protected", authentication, (req, res) => {
     res.sendFile(path.join(__dirname, '/public/protected.html'));
 });
 
-//only for admin
+//only for users with admin role
 app.get("/admin",authentication, authorization, (req, res) => {
     res.sendFile(path.join(__dirname, '/public/admin.html'));
 });
